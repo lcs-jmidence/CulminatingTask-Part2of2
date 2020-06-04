@@ -21,7 +21,7 @@ import PlaygroundSupport
 import CanvasGraphics
 
 // Create canvas
-let canvas = Canvas(width: preferredWidth, height: preferredHeight)
+let canvas = Canvas(width: 500, height: 500)
 
 // Show the canvas in the playground's live view
 PlaygroundPage.current.liveView = canvas
@@ -36,7 +36,7 @@ PlaygroundPage.current.liveView = canvas
  */
 
 // Replace this comment with your first comment – what is the goal of the code you're about to write?
-canvas.drawRectangle(at: Point(x: 50, y: 75), width: 100, height: 200)
+canvas.drawRectangle(at: Point(x: 50, y: 75), width: 100, height: 100)
 
 /*:
  ## Show the Assistant Editor
