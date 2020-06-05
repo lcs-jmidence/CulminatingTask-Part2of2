@@ -105,6 +105,18 @@ public class Sketch : NSObject {
         }
         
         //Create the flower between the row of trees
+        for x in 1...3 {
+            for y in 1...3 {
+        var purpleFlower = VisualizedLindenmayerSystem(system: flower,
+                                                       length: 2,
+                                                       initialDirection: 20,
+                                                       reduction: 1.5,
+                                                       pointToStartRenderingFrom: Point(x: 115 * x, y: 75 * y),
+                                                       drawnOn: canvas)
+        //Render the flower
+        purpleFlower.renderFullSystem()
+            }
+        }
         
         //Create the sun in the top left corner
         //Generate the somewhatSun
