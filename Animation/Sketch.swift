@@ -54,16 +54,14 @@ public class Sketch : NSObject {
             
         }
         
-        // Create a gradient ground background, brown to darker brown as vertical location increases
-        // NOTE: Can use the HSV/HSB sliders (third from top) at this site for help picking colours:
-        //       http://colorizer.org
+        //Create green ground which fades to black
         for y in 0...300 {
             
             // Set the line brightness to progressively get closer to black
-            let currentBrightness = 50.0 - Float(y) / 30.0 * 3.0
+            let currentBrightness = 68.83 - Float(y) / 5
             // DEBUG: Uncomment line below to see how this value changes
             print("currentBrightness is \(currentBrightness)")
-            canvas.lineColor = Color(hue: 25.0, saturation: 68.0, brightness: currentBrightness, alpha: 100.0)
+            canvas.lineColor = Color(hue: 134.4, saturation: 100, brightness: currentBrightness, alpha: 100.0)
             
             // Draw a horizontal line at this vertical location
             canvas.drawLine(from: Point(x: 0, y: y), to: Point(x: canvas.width, y: y))
