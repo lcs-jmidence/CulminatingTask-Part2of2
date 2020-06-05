@@ -1,7 +1,7 @@
 import Foundation
 import CanvasGraphics
 
-class Sketch : NSObject {
+public class Sketch : NSObject {
     
     // NOTE: Every sketch must contain an object of type Canvas named 'canvas'
     //       Therefore, the line immediately below must always be present.

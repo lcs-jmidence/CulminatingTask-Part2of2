@@ -47,7 +47,7 @@ struct LindenmayerSystem {
         word = axiom
         
         // Re-write the word for each generation
-        for generation in 1...generations {
+        for _ in 1...generations {
             
             // Create an empty new word
             var newWord = ""
