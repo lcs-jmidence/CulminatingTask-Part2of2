@@ -31,7 +31,11 @@ public class Sketch : NSObject {
         // Define an L-System that somewhat resembles a cloud (Basically an octogan)
         somewhatCloud = LindenmayerSystem(axiom: "SF+F+F+F+F+F+F+F+",
                                           angle: 45,
-                                          rules: ["F" : [RuleSet(odds: 1, successorText: "1F+F--F+F")]],
+                                          rules: ["F" : [
+                                            RuleSet(odds: 1, successorText: "1F+F--F+F"),
+                                            //RuleSet(odds: 1, successorText: "1+F--F+F"),
+                                            //RuleSet(odds: 1, successorText: "1F+F--+F")
+                                            ]],
                                           colors: ["1": Color(hue: 360, saturation: 0, brightness: 100, alpha: 100)],
                                           generations: 6)
         
@@ -90,7 +94,7 @@ public class Sketch : NSObject {
                                               length: 30,
                                               initialDirection: 0,
                                               reduction: 2.5,
-                                              pointToStartRenderingFrom: Point(x: 50, y: 500),
+                                              pointToStartRenderingFrom: Point(x: 50, y: 550),
                                               drawnOn: canvas)
         //Render the sun
         sun.renderFullSystem()
