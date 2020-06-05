@@ -11,6 +11,7 @@ public class Sketch : NSObject {
     let coniferousTree: LindenmayerSystem
     let somewhatCloud: LindenmayerSystem
     let somewhatSun: LindenmayerSystem
+    let flower: LindenmayerSystem
     
     // This function runs once
     override init() {
@@ -20,6 +21,21 @@ public class Sketch : NSObject {
         
         // Draw slowly
         //canvas.framesPerSecond = 1
+        
+        //Define A Turquoise and Purple flower like L-System (not mine, author: Puneet Bagga)
+        flower = LindenmayerSystem(axiom: "SF-F-F-F-F-F",
+                                   angle: 300,
+                                   rules: ["F" : [
+                                    RuleSet(odds: 1, successorText: "1F-2X++1F+2F-1X+2F")
+                                    ],
+                                           "X" : [
+                                            RuleSet(odds: 1, successorText: "1F-2X+1F++2X+1F+2X")
+                                    ]
+                                    ],
+                                   colors: ["1": Color(hue: 288, saturation: 80, brightness: 36, alpha: 100),
+                                            "2": Color(hue: 174, saturation: 71, brightness: 88, alpha: 100),
+                                            ],
+                                   generations: 5)
         
         //Define an L-System that somewhat resembles a Sun (Basically changing the cloud system)
         somewhatSun = LindenmayerSystem(axiom: "SF+F+F+F+F+F+F+F+",
@@ -64,9 +80,9 @@ public class Sketch : NSObject {
         for y in 300...500 {
             
             // Set the line saturation to progressively get closer to white
-            let currentSaturation = 100.0 - Float(y - 300) / 2
+            let currentSaturation = 100.0 + Float(y + 300) / 2
             // DEBUG: Uncomment line below to see how this value changes
-            print("currentSaturation is: \(currentSaturation)")
+            //print("currentSaturation is: \(currentSaturation)")
             canvas.lineColor = Color(hue: 200.0, saturation: currentSaturation, brightness: 90.0, alpha: 100.0)
             
             // Draw a horizontal line at this vertical location
@@ -80,13 +96,15 @@ public class Sketch : NSObject {
             // Set the line brightness to progressively get closer to black
             let currentBrightness = 68.83 - Float(y) / 5
             // DEBUG: Uncomment line below to see how this value changes
-            print("currentBrightness is \(currentBrightness)")
+            //print("currentBrightness is \(currentBrightness)")
             canvas.lineColor = Color(hue: 134.4, saturation: 100, brightness: currentBrightness, alpha: 100.0)
             
             // Draw a horizontal line at this vertical location
             canvas.drawLine(from: Point(x: 0, y: y), to: Point(x: canvas.width, y: y))
             
         }
+        
+        //Create the flower between the row of trees
         
         //Create the sun in the top left corner
         //Generate the somewhatSun
@@ -121,11 +139,11 @@ public class Sketch : NSObject {
             let y = 40 * i
             
             // DEBUG: To help see where starting points are
-            print("Starting point for tree is... x: \(x), y: \(y)")
+           // print("Starting point for tree is... x: \(x), y: \(y)")
             
             // Define the length of the tree's initial stroke
             let length = 27.0 - Double(y) / 16.0
-            print("Length of line for system is: \(length)")
+            //print("Length of line for system is: \(length)")
             
             // Generate the tree
             var aTree = VisualizedLindenmayerSystem(system: coniferousTree,
