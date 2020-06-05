@@ -100,15 +100,19 @@ public class Sketch : NSObject {
         sun.renderFullSystem()
         
         //Create somewhatClouds in the sky
-        //Generate the somehwhatCloud
+        //Generate the somehwhatCloud in random positions in the sky
+        for _ in 1...15 {
+            let x = random(from: 0, to: 500)
+            let y = random(from: 350, to: 500)
         var cloud = VisualizedLindenmayerSystem(system: somewhatCloud,
                                                 length: 30,
                                                 initialDirection: 0,
-                                                reduction: 4.4,
-                                                pointToStartRenderingFrom: Point(x: 250, y: 250),
+                                                reduction: 4.6,
+                                                pointToStartRenderingFrom: Point(x: x, y: y),
                                                 drawnOn: canvas)
         //Render the cloud
         cloud.renderFullSystem()
+        }
         
         //Create column of trees (1 of 2)
         // Iterate to create 9 trees
