@@ -68,30 +68,17 @@ public class Sketch : NSObject {
             
         }
         
-        // Create 9 trees, drawn from their tops along a quadratic path
-        
-        // Define the vertex of the parabolic path (top right of canvas)
-        let vertex = Point(x: 450, y: 350)
-        
-        // Define some other point on the parabolic path (in this case, closer to bottom left)
-        let anotherPointOnParabola = Point(x: 100, y: 225)
-        
-        // Work out the "a" value for the parabola (vertical stretch)
-        let a = (anotherPointOnParabola.y - vertex.y) / pow(anotherPointOnParabola.x - vertex.x, 2)
-        
+        //Create column of trees (1 of 2)
         // Iterate to create 9 trees
-        for i in 1...9 {
-
-            // Use a quadratic relationship to define the vertical starting point for the top of each tree
-            // (trees grow down from starting point)
-            let x = CGFloat(i - 1) * 50.0 + 75              // This defines "spread" of the trees along the quadratic path
-            let y = a * pow(x - vertex.x, 2) + vertex.y     // Determine vertical position using y = a(x-h)^2 + k
+        for i in 1...8 {
+            let x = 70
+            let y = 40 * i
             
             // DEBUG: To help see where starting points are
             print("Starting point for tree is... x: \(x), y: \(y)")
             
             // Define the length of the tree's initial stroke
-            let length = 27.0 - Double(y) / 16.0            // Piggyback on quadratic change in y values to set length
+            let length = 27.0 - Double(y) / 16.0
             print("Length of line for system is: \(length)")
             
             // Generate the tree
@@ -104,6 +91,24 @@ public class Sketch : NSObject {
             
             // Render this tree
             aTree.renderFullSystem()
+            
+            //Create column of trees (2 of 2)
+            for height in 1...8 {
+                let x = 430
+                let y = 40 * height
+                // Define the length of the tree's initial stroke
+                let length = 27.0 - Double(y) / 16.0
+                
+                // Generate the tree
+                var treeColumn = VisualizedLindenmayerSystem(system: coniferousTree,
+                                                             length: length,
+                                                             initialDirection: 270,
+                                                             reduction: 1.25,
+                                                             pointToStartRenderingFrom: Point(x: x, y: y),
+                                                             drawnOn: canvas)
+                //Render this tree
+                treeColumn.renderFullSystem()
+            }
             
         }
         
