@@ -9,6 +9,7 @@ public class Sketch : NSObject {
     
     // L-system definitions
     let coniferousTree: LindenmayerSystem
+    let somewhatCloud: LindenmayerSystem
     
     // This function runs once
     override init() {
@@ -18,6 +19,13 @@ public class Sketch : NSObject {
         
         // Draw slowly
         //canvas.framesPerSecond = 1
+        
+        // Define an L-System that somewhat resembles a cloud (Basically an octogan)
+        somewhatCloud = LindenmayerSystem(axiom: "SF+F+F+F+F+F+F+F+",
+                                          angle: 45,
+                                          rules: ["F" : [RuleSet(odds: 1, successorText: "1F+F--F+F")]],
+                                          colors: ["1": Color(hue: 360, saturation: 0, brightness: 100, alpha: 100)],
+                                          generations: 6)
         
         // Define a stochastic system that resembles a coniferous tree
         coniferousTree = LindenmayerSystem(axiom: "SF",
@@ -67,6 +75,17 @@ public class Sketch : NSObject {
             canvas.drawLine(from: Point(x: 0, y: y), to: Point(x: canvas.width, y: y))
             
         }
+        
+        //Create somewhatClouds in the sky
+        //Generate the somehwhatCloud
+        var cloud = VisualizedLindenmayerSystem(system: somewhatCloud,
+                                                length: 30,
+                                                initialDirection: 0,
+                                                reduction: 4.4,
+                                                pointToStartRenderingFrom: Point(x: 250, y: 250),
+                                                drawnOn: canvas)
+        //Render the cloud
+        cloud.renderFullSystem()
         
         //Create column of trees (1 of 2)
         // Iterate to create 9 trees
